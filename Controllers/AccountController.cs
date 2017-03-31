@@ -113,14 +113,22 @@ namespace ZenithSocietyCore.Controllers
             ApplicationUser user = _context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
             var hasRole = await _userManager.IsInRoleAsync(user, RoleName);
-            if (hasRole)
+            if (UserName == "a" && RoleName == "Admin")
             {
-                await _userManager.RemoveFromRoleAsync(user, RoleName);
-                ViewBag.ResultMessage = "Role removed from this user successfully !";
+
+                ViewBag.ResultMessage = "Account a cannot be removed from Admin group";
             }
             else
             {
-                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+                if (hasRole)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, RoleName);
+                    ViewBag.ResultMessage = "Role removed from this user successfully !";
+                }
+                else
+                {
+                    ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+                }
             }
             // prepopulat roles for the view dropdown
             var listRoles = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
