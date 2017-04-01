@@ -78,9 +78,13 @@ namespace ZenithCore
             });
 
 
-            services.AddMvc(options =>
+            services.AddMvc();
+            services.AddCors(options =>
             {
-                options.RespectBrowserAcceptHeader = true; // false by default
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyHeader()
+                                      .WithHeaders("GET","POST")
+                                      .AllowAnyMethod());
             });
 
             // Add application services.

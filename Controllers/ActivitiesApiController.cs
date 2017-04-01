@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
 using System.Collections;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/ActivitiesApi")]
+    [EnableCors("AllowAll")]
     public class ActivitiesApiController : Controller
     {
         private readonly ApplicationDbContext _context;

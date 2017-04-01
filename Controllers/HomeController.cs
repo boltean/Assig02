@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ZenithCore.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithCore.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
