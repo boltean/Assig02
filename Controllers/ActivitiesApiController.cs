@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
+using System.Collections;
 
 namespace ZenithCore.Controllers
 {
@@ -23,10 +24,17 @@ namespace ZenithCore.Controllers
 
         // GET: api/ActivitiesApi
         [HttpGet]
-        public IEnumerable<Activity> GetActivities()
+        public IEnumerable<ActivityApi> GetActivities()
         {
-            return _context.Activities;
+            return from a in _context.Activities
+                   select new ActivityApi
+                   {
+                       ActivityId=a.ActivityId,
+                       ActivityDescription = a.ActivityDescription
+                   };
         }
+
+      
 
         // GET: api/ActivitiesApi/5
         [HttpGet("{id}")]

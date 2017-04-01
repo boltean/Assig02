@@ -29,5 +29,6 @@ namespace ZenithCore.Data
 
         public DbSet<Event> Events { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<ZenithCore.Models.ApplicationUser> ApplicationUser { get; set; }
     }
 }

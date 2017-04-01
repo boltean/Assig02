@@ -24,4 +24,15 @@ namespace ZenithCore.Models.ZenithModels
         public List<Event> Events { get; set; }
 
     }
+
+    public class ActivityApi
+    {
+   
+        public int ActivityId { get; set; }
+            
+        public string ActivityDescription { get; set; }
+    
+
+
+    }
 }
