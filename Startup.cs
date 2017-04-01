@@ -78,7 +78,10 @@ namespace ZenithCore
             });
 
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true; // false by default
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

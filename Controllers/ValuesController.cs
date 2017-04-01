@@ -9,7 +9,7 @@ namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/Values")]
-    [Authorize]
+  //  [Authorize]
     public class ValuesController : Controller
     {
         // GET: api/Values
