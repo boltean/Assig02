@@ -31,7 +31,7 @@ namespace ZenithCore.Controllers
 
             if ((int)System.DateTime.Now.DayOfWeek == 0)
             {
-                firstDay = DateTime.Now.ToString("MM/dd/yy") + " 12:00 AM";
+                firstDay = DateTime.Now.AddDays(-6).ToString("MM/dd/yy") + " 12:00 AM";
             }
             else
             {
