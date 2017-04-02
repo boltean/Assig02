@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/EventsApi")]
+    //[Authorize]
     public class EventsApiController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,9 +25,19 @@ namespace ZenithCore.Controllers
 
         // GET: api/EventsApi
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<EventApi> GetEvents()
         {
-            return _context.Events;
+            //var applicationDbContext = _context.Events.Include(e => e.Activity);
+            return from e in _context.Events.Include(a => a.Activity)
+                   select new EventApi                   {
+                       ActivityDescription = e.Activity.ActivityDescription,
+                       EventFrom = e.EventFrom,
+                       EventTo=e.EventTo,
+                       IsActive = e.IsActive,
+                       EventToFrom =e.EventFrom.ToString("MMM dd, yyyy ") + e.EventFrom.ToString("hh:mm tt- ") + e.EventTo.ToString("hh:mm tt")
+
+
+                   };
         }
 
         // GET: api/EventsApi/5

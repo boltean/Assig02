@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace ZenithCore.Models.ZenithModels
 {
-    public class Event: IValidatableObject 
+    public class Event : IValidatableObject
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EventId { get; set; }
-        
+
         [Display(Name = "From")]
         public DateTime EventFrom { get; set; }
         [Display(Name = "To")]
@@ -36,5 +36,16 @@ namespace ZenithCore.Models.ZenithModels
                                        memberNames: new[] { "EventTo" });
             }
         }
+    }
+
+    public class EventApi
+    {
+
+        public DateTime EventFrom { get; set; }
+        public DateTime EventTo { get; set; }
+        public string EventToFrom { get; set; }
+
+        public bool IsActive { get; set; }
+        public String ActivityDescription { get; set; }
     }
 }

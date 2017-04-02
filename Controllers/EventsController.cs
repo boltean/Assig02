@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithCore.Controllers
 {
     [Authorize(Roles = "Admin,Member")]
+
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -14,7 +14,7 @@ namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/ActivitiesApi")]
-    [EnableCors("AllowAll")]
+    //[EnableCors("AllowAll")]
     public class ActivitiesApiController : Controller
     {
         private readonly ApplicationDbContext _context;

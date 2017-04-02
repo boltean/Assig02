@@ -41,7 +41,8 @@ namespace ZenithCore
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options => {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 options.UseOpenIddict();
             });
@@ -78,14 +79,17 @@ namespace ZenithCore
             });
 
 
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        builder => builder
+            //        .AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader());
+            //});
+
             services.AddMvc();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                    builder => builder.AllowAnyHeader()
-                                      .WithHeaders("GET","POST")
-                                      .AllowAnyMethod());
-            });
+
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -109,11 +113,18 @@ namespace ZenithCore
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+               builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowAnyOrigin());
+
             app.UseStaticFiles();
 
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
 
             app.UseOAuthValidation();
             app.UseOpenIddict();
