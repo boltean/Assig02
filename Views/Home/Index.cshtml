@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h1>Zenith Society</h1>
+    <h1>Zenith Society - Members View</h1>
     <p class="lead">The Zenith Society is a family oriented non-for-profit organization that holds events during the week. </p>
 
 </div>
@@ -14,8 +14,32 @@
 
 <div class="row">
     <div class="col-md-12 text-center ">
-        <h4>Zenith Society <br />Activities scheduled for this week (Monday through Sunday):    </h4>
+        <h4>Zenith Society <br />Activities scheduled for <strong>@ViewBag.Week week </strong>(Monday through Sunday):    </h4>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3 text-left">
+        @if (ViewBag.Week == "current")
+        {
+            <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id=-1>&lt;Previous Week</a>
+        }
+
+        @if (ViewBag.Week == "next")
+        {<a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">&lt;Current Week</a>
+
+        }
+
+    </div>
+    <div class="col-md-3 text-right">
+        @if (ViewBag.Week == "current")
+        { <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id=1>Next Week&gt;</a>}
+
+        @if (ViewBag.Week == "previous")
+        {<a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Current Week&gt;</a>}
+
+    </div>
+    <div class="col-md-3"></div>
 </div>
 
 <div class="row">
@@ -28,7 +52,7 @@
 
             @foreach (var item in Model)
             {
-                if (!(item.EventFrom.ToString() == eventDate))
+                if (!(item.EventFrom.ToString("MM/dd/yy") == eventDate))
                 {
                     <tr class="success">
                         <td colspan="2" align="left">
@@ -51,7 +75,7 @@
                     </td>
 
                 </tr>
-                eventDate = item.EventFrom.ToString();
+                eventDate = item.EventFrom.ToString("MM/dd/yy");
 
             }
 
