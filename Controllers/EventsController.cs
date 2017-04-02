@@ -9,10 +9,12 @@ using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace ZenithCore.Controllers
 {
-    [Authorize(Roles = "Admin,Member")]
+    [Authorize(Roles = "Admin")]
 
     public class EventsController : Controller
     {
@@ -26,8 +28,11 @@ namespace ZenithCore.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Events.Include(e => e.Activity);
-            return View(await applicationDbContext.ToListAsync());
+           // var applicationDbContext = _context.Events.Include(e => e.Activity);
+            var events = from e in _context.Events.Include(e => e.Activity)
+                         orderby e.EventFrom descending
+                         select e;
+            return View(await events.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -68,6 +73,8 @@ namespace ZenithCore.Controllers
         {
             if (ModelState.IsValid)
             {
+                @event.CreationDate = System.DateTime.Now;
+                @event.EnteredBy = User.Identity.Name;
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

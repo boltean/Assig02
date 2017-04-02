@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using ZenithCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithCore.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,7 +31,7 @@ namespace ZenithCore.Controllers
 
             if ((int)System.DateTime.Now.DayOfWeek == 0)
             {
-                firstDay = DateTime.Now.ToString() + " 12:00 AM";
+                firstDay = DateTime.Now.ToString("MM/dd/yy") + " 12:00 AM";
             }
             else
             {
@@ -40,7 +41,7 @@ namespace ZenithCore.Controllers
 
             if ((int)System.DateTime.Now.DayOfWeek == 0)
             {
-                lastDay = System.DateTime.Now.ToString() + " 23:59";
+                lastDay = System.DateTime.Now.ToString("MM/dd/yy") + " 23:59";
             }
             else
             {

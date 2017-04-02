@@ -9,12 +9,14 @@ using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
 using System.Collections;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/ActivitiesApi")]
     //[EnableCors("AllowAll")]
+    [Authorize]
     public class ActivitiesApiController : Controller
     {
         private readonly ApplicationDbContext _context;

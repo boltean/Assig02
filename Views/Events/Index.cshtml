@@ -12,54 +12,58 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.EventFrom)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EventTo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EnteredBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.Activity)
+                @Html.DisplayNameFor(model => model.Activity.ActivityDescription)
+            </th>
+            <th>
+                From/To
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EnteredBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnteredBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activity.ActivityDescription)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activity.ActivityDescription)
+            @if (item.EventFrom < System.DateTime.Now)
+                { <span style="color:red">EXPIRED</span>}
+
+
+
+        </td>
+        <td>
+            @item.EventFrom.ToString("MM/dd/yy h:mm tt") - @item.EventTo.ToString("h:mm tt")
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+        </td>
+    </tr>
+
 }
     </tbody>
 </table>

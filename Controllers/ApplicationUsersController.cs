@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/ApplicationUsers")]
+    [Authorize]
     public class ApplicationUsersController : Controller
     {
         private readonly ApplicationDbContext _context;
