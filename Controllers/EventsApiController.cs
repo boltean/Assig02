@@ -14,7 +14,7 @@ namespace ZenithCore.Controllers
 {
     [Produces("application/json")]
     [Route("api/EventsApi")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class EventsApiController : Controller
     {
         private readonly ApplicationDbContext _context;
