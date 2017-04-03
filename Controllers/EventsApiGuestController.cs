@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models.ZenithModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections;
 
 namespace ZenithCore.Controllers
 {
@@ -25,7 +26,7 @@ namespace ZenithCore.Controllers
 
         // GET: api/EventsApi
         [HttpGet]
-        public IEnumerable<EventApi> GetEvents()
+        public IEnumerable GetEvents()
         {
             //var applicationDbContext = _context.Events.Include(e => e.Activity);
 
@@ -69,12 +70,12 @@ namespace ZenithCore.Controllers
             return from e in _context.Events.Include(a => a.Activity)
                    where e.EventFrom >= minDate && e.EventTo <= maxDate && e.IsActive
                    orderby e.EventFrom ascending
-                   select new EventApi                   {
+                   select new                   {
                        ActivityDescription = e.Activity.ActivityDescription,
                        EventFrom = e.EventFrom,
                        EventTo=e.EventTo,
                        IsActive = e.IsActive,
-                       EventToFrom =e.EventFrom.ToString("MMM dd, yyyy ") + e.EventFrom.ToString("hh:mm tt- ") + e.EventTo.ToString("hh:mm tt")
+                       EventToFrom =e.EventFrom.ToString("MMM dd, yyyy ") + e.EventFrom.ToString("hh:mm tt - ") + e.EventTo.ToString("hh:mm tt")
 
 
                    };

@@ -28,14 +28,17 @@ namespace ZenithCore.Controllers
 
         // GET: api/ActivitiesApi
         [HttpGet]
-        public IEnumerable<ActivityApi> GetActivities()
+        public IEnumerable GetActivities()
         {
-            return from a in _context.Activities
-                   select new ActivityApi
-                   {
-                       ActivityId=a.ActivityId,
-                       ActivityDescription = a.ActivityDescription
-                   };
+            var qry = from a in _context.Activities
+                      select new { a.ActivityId, a.ActivityDescription, a.CreationDate };
+            return(qry);
+            //return from a in _context.Activities
+            //       select new ActivityApi
+            //       {
+            //           ActivityId=a.ActivityId,
+            //           ActivityDescription = a.ActivityDescription
+            //       };
         }
 
       

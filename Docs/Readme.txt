@@ -9,7 +9,9 @@ http://assig02.azurewebsites.net/
 Angular 2 project:
 http://assign02angular.azurewebsites.net/
 
-Connection strings points directly to the Azure database, so no database is provided with project files.
+Data connection string points directly to the Azure database, so no database is provided with project files.
+
+
 
 Azure web app settings to match PST:
 WEBSITE_TIME_ZONE: Pacific Standard Time

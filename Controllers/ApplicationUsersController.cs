@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZenithCore.Data;
 using ZenithCore.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections;
 
 namespace ZenithCore.Controllers
 {
@@ -25,7 +26,7 @@ namespace ZenithCore.Controllers
 
         // GET: api/ApplicationUsers
         [HttpGet]
-        public IEnumerable<ApplicationUser> GetApplicationUser()
+        public IEnumerable GetApplicationUser()
         {
             //var query = _context.ApplicationUser.Join(_context.UserRoles,
             //    au=>au.Id,
@@ -33,12 +34,12 @@ namespace ZenithCore.Controllers
             //    (au, ur) => new {ApplicationUser=au, use}
 
 
-            //var query = from a in _context.ApplicationUser
-            //             join u in _context.UserRoles on a.Id equals u.UserId
-            //             select new { ApplicationUser = a, UserRoles = u };
+            var query = from a in _context.ApplicationUser
 
-            return _context.ApplicationUser;
-            //return Ok();
+                        select new { a.Email, a.FirstName, a.LastName,a.UserName,a.PhoneNumber};
+
+            //return _context.ApplicationUser;
+            return query;
         }
 
         // GET: api/ApplicationUsers/5
