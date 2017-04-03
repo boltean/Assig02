@@ -34,7 +34,7 @@ namespace ZenithCore.Controllers
         public async Task<IActionResult> Index()
         {
             var roles = from a in _context.Roles
-
+                        orderby a.Name
                         select a;
             return View(await roles.ToListAsync());
         }
